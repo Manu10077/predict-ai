@@ -1,18 +1,17 @@
-# Use official lightweight Python image
-FROM python:3.10-slim
+# ✅ Use the official TensorFlow Docker image with Python 3.10
+FROM tensorflow/tensorflow:2.12.0
 
 # Set working directory
 WORKDIR /app
 
-# Copy project files
+# Copy all files into the container
 COPY . .
 
-# Install dependencies
-RUN pip install --upgrade pip
-RUN pip install -r requirements.txt
+# Install additional dependencies (Flask, Pillow, etc.)
+RUN pip install Flask pillow
 
-# Expose Flask port
+# Expose the port your Flask app will run on
 EXPOSE 10000
 
-# Start the app
+# Run your Flask app
 CMD ["python", "app.py"]
