@@ -1,17 +1,22 @@
-# ✅ Use the official TensorFlow Docker image with Python 3.10
-FROM tensorflow/tensorflow:2.12.0
+# Use a compatible base image
+FROM python:3.10-slim
+
+# Set environment variables
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
 
 # Set working directory
 WORKDIR /app
 
-# Copy all files into the container
-COPY . .
+# Copy files
+COPY . /app
 
-# Install additional dependencies (Flask, Pillow, etc.)
-RUN pip install Flask pillow
+# Install dependencies
+RUN pip install --upgrade pip
+RUN pip install -r requirements.txt
 
-# Expose the port your Flask app will run on
-EXPOSE 10000
+# Expose the port Flask will run on
+EXPOSE 5000
 
-# Run your Flask app
+# Command to run the app
 CMD ["python", "app.py"]
