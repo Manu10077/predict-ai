@@ -1,9 +1,16 @@
 services:
   - type: web
-    name: digit-ai-docker
+    name: digit-ai-flask
     env: docker
     plan: free
-    dockerfilePath: Dockerfile
+    region: oregon
+    branch: main
+    dockerfilePath: ./Dockerfile
+    buildFilter:
+      paths: 
+        - Dockerfile
+        - app.py
+        - mnist_model.keras
+        - requirements.txt
+        - templates/**
     autoDeploy: true
-
-
